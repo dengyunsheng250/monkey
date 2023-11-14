@@ -65,7 +65,7 @@ impl Lexer {
     fn next_token(&mut self) -> Option<Token> {
         let token = match self.read_char() {
             c @ '=' => Token::new(Type::ASSIGN, String::from(c)),
-            c => Token::new(Type::ILLEGAL, String::from(c)),
+            c => Token::new(Type::EOF, String::from(c)),
         };
         Some(token)
     }
@@ -73,7 +73,7 @@ impl Lexer {
     fn tokenizer(&mut self) -> Vec<Token> {
         let mut v = vec![];
         while let Some(t) = self.next_token() {
-            if t.t == Type::ILLEGAL {
+            if t.t == Type::EOF {
                 break;
             }
             v.push(t);
